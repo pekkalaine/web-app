@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const app = express()
 const hbs = require('hbs')
+
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
@@ -19,8 +20,7 @@ hbs.registerPartials(partialsPath)
 
 app.get('', (req, res) => {
     res.render('index', {
-        title: 'Weather App',
-        name: 'Andrew'
+        title: 'Weather'
     })
 })
 
@@ -44,7 +44,7 @@ app.get('/weather', (req, res) => {
 
     if(!req.query.address) {
         return res.send({
-            error: 'You must provide an address'
+            error: 'You must provide a location.'
         })
     }
 
@@ -70,16 +70,14 @@ app.get('/weather', (req, res) => {
 app.get('/help/*', (req, res) => {
     res.render('notfound', {
         title: '404',
-        message: 'Help article not found',
-        name: 'Andrew'
+        message: 'Help article not found'
     })
 })
 
 app.get('*', (req, res) => {
     res.render('notfound', {
         title: '404',
-        message: 'Page not found',
-        name: 'Andrew'
+        message: 'Page not found.'
     })
 })
 
